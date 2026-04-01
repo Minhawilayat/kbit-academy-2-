@@ -1,0 +1,40 @@
+{
+  "entities": {
+    "inquiry": {
+      "title": "Course Inquiry",
+      "description": "A student inquiry for a specific course or general information.",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "description": "The full name of the student." },
+        "email": { "type": "string", "format": "email", "description": "The email address of the student." },
+        "subject": { "type": "string", "description": "The subject of the inquiry." },
+        "message": { "type": "string", "description": "The message content." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the inquiry was created." }
+      },
+      "required": ["fullName", "email", "subject", "message", "createdAt"]
+    },
+    "enrollment": {
+      "title": "Course Enrollment",
+      "description": "A student enrollment request for a specific course.",
+      "type": "object",
+      "properties": {
+        "studentName": { "type": "string" },
+        "studentEmail": { "type": "string", "format": "email" },
+        "courseTitle": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "contacted", "enrolled"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["studentName", "studentEmail", "courseTitle", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "inquiry",
+      "description": "Collection of student inquiries."
+    },
+    "/enrollments/{enrollmentId}": {
+      "schema": "enrollment",
+      "description": "Collection of course enrollment requests."
+    }
+  }
+}
